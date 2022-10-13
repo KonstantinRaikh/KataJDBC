@@ -19,10 +19,11 @@ public class UserDaoJDBCImpl implements UserDao {
         try (Statement statement = Util.getStatement()) {
             statement.execute("CREATE DATABASE IF NOT EXISTS test;");
             statement.execute("CREATE TABLE IF NOT EXISTS test.users" +
-                                  "(id INT PRIMARY KEY AUTO_INCREMENT," +
-                                  "name VARCHAR(15)," +
-                                  "last_name VARCHAR(15)," +
-                                  "age int);");
+                    "(id INT PRIMARY KEY AUTO_INCREMENT," +
+                    "name VARCHAR(15)," +
+                    "last_name VARCHAR(15)," +
+                    "age int);");
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -32,6 +33,7 @@ public class UserDaoJDBCImpl implements UserDao {
         try (Statement statement = Util.getStatement()) {
             statement.execute("DROP TABLE IF EXISTS test.users;");
             statement.execute("DROP DATABASE IF EXISTS test;");
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -54,13 +56,14 @@ public class UserDaoJDBCImpl implements UserDao {
     }
 
     public void removeUserById(long id) {
-        try(PreparedStatement preparedStatement = Util.getConnection()
+        try (PreparedStatement preparedStatement = Util.getConnection()
                 .prepareStatement("DELETE FROM test.users WHERE id = (?);");
-            Statement statement = Util.getStatement()){
+             Statement statement = Util.getStatement()) {
             statement.execute("START TRANSACTION;");
             preparedStatement.setLong(1, id);
             preparedStatement.execute();
             statement.execute("COMMIT;");
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -86,6 +89,7 @@ public class UserDaoJDBCImpl implements UserDao {
     public void cleanUsersTable() {
         try (Statement statement = Util.getStatement()) {
             statement.execute("TRUNCATE TABLE test.users;");
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

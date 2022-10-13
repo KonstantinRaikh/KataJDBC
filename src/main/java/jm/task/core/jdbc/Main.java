@@ -2,30 +2,32 @@ package jm.task.core.jdbc;
 
 import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
 import jm.task.core.jdbc.model.User;
+import jm.task.core.jdbc.service.UserService;
+import jm.task.core.jdbc.service.UserServiceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        UserDaoJDBCImpl userDaoJDBC = new UserDaoJDBCImpl();
+        UserService userService = new UserServiceImpl();
 
-        userDaoJDBC.createUsersTable();
+        userService.createUsersTable();
 
-        userDaoJDBC.saveUser("Kostya", "Raikh", (byte) 30);
+        userService.saveUser("Kostya", "Raikh", (byte) 30);
         System.out.println("User с именем – Kostya добавлен в базу данных");
-        userDaoJDBC.saveUser("Marina", "Raikh", (byte) 35);
+        userService.saveUser("Marina", "Raikh", (byte) 35);
         System.out.println("User с именем – Marina добавлен в базу данных");
-        userDaoJDBC.saveUser("Lesha", "Danilov", (byte) 37);
+        userService.saveUser("Lesha", "Danilov", (byte) 37);
         System.out.println("User с именем – Lesha добавлен в базу данных");
-        userDaoJDBC.saveUser("Dima", "Danilov", (byte) 35);
+        userService.saveUser("Dima", "Danilov", (byte) 35);
         System.out.println("User с именем – Dima добавлен в базу данных");
 
-        List<User> userList = userDaoJDBC.getAllUsers();
+        List<User> userList = userService.getAllUsers();
         System.out.println(userList);
 
-        userDaoJDBC.cleanUsersTable();
+        userService.cleanUsersTable();
 
-        userDaoJDBC.dropUsersTable();
+        userService.dropUsersTable();
     }
 }
