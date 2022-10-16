@@ -12,7 +12,8 @@ public class Util {
         Connection connection = null;
         try{
             connection = DriverManager.getConnection(URL, USER, PASS);
-        }catch (SQLException ignore){
+        }catch (SQLException e){
+            e.printStackTrace();
         }
         return connection;
     }
@@ -21,7 +22,8 @@ public class Util {
         Statement statement = null;
         try{
             statement = Util.getConnection().createStatement();
-        }catch (SQLException ignore){
+        }catch (SQLException e){
+            e.printStackTrace();
         }
         return statement;
     }
